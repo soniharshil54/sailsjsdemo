@@ -41,11 +41,11 @@ module.exports = {
     },
     edit: function(req, res){
         Articles.findOne({id:req.params.id})
-            .then(result => {
-                res.redirect('/articles/list');
+            .then(article => {
+                res.view('pages/edit', {article:article});
             })
             .catch(err => {
-                res.view('pages/edit', {article:article});
+                res.send(500, {error: 'Database Error'});
             })
     },
     update: function(req, res){
